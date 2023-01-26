@@ -1,5 +1,8 @@
 package AdavanceDSA.Trees;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class BSTImp {
     public static void main(String args[]){
         Node root = null;
@@ -12,10 +15,8 @@ public class BSTImp {
         insert(root,6);
         insert(root,8);
         insert(root,9);
-        System.out.println(root.getData());
-        System.out.println(findEle(root,8));
-        System.out.println(maxEle(root));
-        System.out.println(inorderPre(root,9));
+
+        System.out.println(nthSmallest(root,4));
     }
 
     public static Node insert(Node node, int val){
@@ -98,6 +99,36 @@ public class BSTImp {
            }
         }
         return suc;
+    }
+
+    /**
+     *Nth Smallest and Largest element of the given binary tree
+     */
+    public static int nthSmallest(Node root , int n){
+        int count = 0;
+        Node cur = root;
+        while (cur !=null && count<n){
+            if(cur.getLeft() == null){
+                count++;
+                if(count == n) return cur.getData();
+                cur = cur.getRight();
+            }else {
+                Node prev = cur.getLeft();
+                while (prev.getRight()!=null && prev.getRight()!=cur){
+                    prev = prev.getRight();
+                }
+                if(prev.getRight() == null){
+                    prev.setRight(cur);
+                    cur = cur.getLeft();
+                }else{
+                    prev.setRight(null);
+                    count++;
+                    if(count == n) return cur.getData();
+                    cur = cur.getRight();
+                }
+            }
+        }
+        return -1;
     }
 
 }
