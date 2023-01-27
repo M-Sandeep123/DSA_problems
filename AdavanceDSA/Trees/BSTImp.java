@@ -16,7 +16,7 @@ public class BSTImp {
         insert(root,8);
         insert(root,9);
 
-        System.out.println(nthSmallest(root,4));
+        System.out.println(nthLargest(root,4));
     }
 
     public static Node insert(Node node, int val){
@@ -125,6 +125,32 @@ public class BSTImp {
                     count++;
                     if(count == n) return cur.getData();
                     cur = cur.getRight();
+                }
+            }
+        }
+        return -1;
+    }
+
+    public static int nthLargest(Node root, int k){
+        Node cur = root;
+        while (cur !=null){
+            if(cur.getRight() == null){
+                k--;
+                if(k==0) return cur.getData();
+                cur = cur.getLeft();
+            }else {
+                Node prev = cur.getRight();
+                while (prev.getLeft()!=null && prev.getLeft() != cur){
+                    prev = prev.getLeft();
+                }
+                if(prev.getLeft() == null){
+                    prev.setLeft(cur);
+                    cur = cur.getRight();
+                }else {
+                    prev.setLeft(null);
+                    k--;
+                    if(k==0) return cur.getData();
+                    cur = cur.getLeft();
                 }
             }
         }
