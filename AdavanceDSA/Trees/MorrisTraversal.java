@@ -23,7 +23,7 @@ public class MorrisTraversal {
         System.out.println(morrisTraversal(root));
     }
 
-    private static ArrayList<Integer> morrisTraversal(Node root) {
+    public static ArrayList<Integer> morrisTraversal(Node root) {
         ArrayList<Integer> list = new ArrayList<>();
 
         Node cur = root;
