@@ -7,10 +7,19 @@ public class LargestBST {
     public static void main(String args[]){
         int arr[] = {20,15,40,14,18,30,60,-1,17,16,19,-1,-1,50,-1};
         TreeNodes root = createTree(arr,0);
-        System.out.println(largestBST(root));
+        LargestBST obj = new LargestBST();
+        System.out.println(obj.largestBST(root));
     }
 
-    private static NodeValue largestBSTHelper(TreeNodes root){
+     class NodeValue{
+        int maxNode,minNode,maxSize;
+        NodeValue(int maxNode,int minNode,int maxSize){
+            this.maxNode = maxNode;
+            this.minNode = minNode;
+            this.maxSize = maxSize;
+        }
+    }
+    private NodeValue largestBSTHelper(TreeNodes root){
         if(root == null){
             return new NodeValue(Integer.MAX_VALUE,Integer.MIN_VALUE,0);
         }
@@ -21,7 +30,7 @@ public class LargestBST {
         }
         return  new NodeValue(Integer.MIN_VALUE,Integer.MAX_VALUE,Math.max(left.maxSize, right.maxSize));
     }
-    private static int largestBST(TreeNodes root) {
+    private int largestBST(TreeNodes root) {
 
         return largestBSTHelper(root).maxSize;
     }
@@ -37,11 +46,4 @@ public class LargestBST {
     }
 }
 
-class NodeValue{
-    int maxNode,minNode,maxSize;
-    NodeValue(int maxNode,int minNode,int maxSize){
-        this.maxNode = maxNode;
-        this.minNode = minNode;
-        this.maxSize = maxSize;
-    }
-}
+
